@@ -29,7 +29,7 @@ public class AuthenticationService {
         user.setRole(Role.CLIENTE);
 
         userRepository.save(user);
-        var jwtToken = jwtService.generateToken((UserDetails) user);
+        var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }
 
@@ -43,7 +43,7 @@ public class AuthenticationService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
 
-        var jwtToken = jwtService.generateToken((UserDetails) user);
+        var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }
 }
