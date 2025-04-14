@@ -22,7 +22,8 @@ public class JwtService {
     private String SECRET_KEY;
 
     private SecretKey getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        byte[] keyBytes = java.util.Base64.getDecoder().decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10;
